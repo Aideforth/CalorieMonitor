@@ -4,7 +4,6 @@ using CalorieMonitor.Core.Interfaces;
 using CalorieMonitor.Data.Interfaces;
 using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Data;
 
 namespace CalorieMonitor.Data.Implementations
@@ -16,6 +15,7 @@ namespace CalorieMonitor.Data.Implementations
             {FilterComparison.GreaterThan, ">" },
             {FilterComparison.LessThan, "<" },
             {FilterComparison.Like, "like" },
+            {FilterComparison.NotEquals, "!=" },
         };
         readonly Dictionary<Type, DbType> typeToDbType = new Dictionary<Type, DbType> {
             {typeof(int), DbType.Int32 },

@@ -5,6 +5,7 @@
         Equals,
         GreaterThan,
         LessThan,
-        Like
+        Like,
+        NotEquals
     }
 }

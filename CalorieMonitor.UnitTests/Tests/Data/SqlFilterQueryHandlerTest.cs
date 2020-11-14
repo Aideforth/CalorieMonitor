@@ -89,7 +89,7 @@ namespace CalorieMonitor.UnitTests.Tests.Data
             var query = new SqlFilterQueryHandler().GenerateQuery(searchFilter5, out parameters);
 
             //assert
-            Assert.Equal("where ((((Name like @Name) Or (Age > @Age)) And (Distance = @Distance)) Or ((RecordDate < @RecordDate) And (RecordDate > @RecordDate1))) And (Distance > @Distance1)", query);
+            Assert.Equal("where ((((Name like @Name) Or (Age > @Age)) And (Distance = @Distance)) Or ((RecordDate < @RecordDate) And (RecordDate > @RecordDate1))) And (Distance != @Distance1)", query);
             ValidateFilter2Parameters(6); 
             Assert.Equal(1, parameters.Count(c => c.Name == "@RecordDate" && (DateTime)c.Value == currentTime.AddDays(-1) && c.DbType == DbType.DateTime));
             Assert.Equal(1, parameters.Count(c => c.Name == "@RecordDate1" && (DateTime)c.Value == currentTime && c.DbType == DbType.DateTime));
@@ -123,7 +123,7 @@ namespace CalorieMonitor.UnitTests.Tests.Data
             {
                 Operation = FilterOperation.And,
                 LeftHandFilter = searchFilter4,
-                RightHandFilter = new FieldFilter("Distance", FilterComparison.GreaterThan, 101)
+                RightHandFilter = new FieldFilter("Distance", FilterComparison.NotEquals, 101)
             };
             return searchFilter5;
         }

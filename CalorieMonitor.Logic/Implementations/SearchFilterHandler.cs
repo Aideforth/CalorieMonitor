@@ -20,7 +20,8 @@ namespace CalorieMonitor.Logic.Implementations
             {"eq", FilterComparison.Equals },
             {"gt", FilterComparison.GreaterThan },
             {"lt", FilterComparison.LessThan },
-            {"like", FilterComparison.Like }
+            {"like", FilterComparison.Like },
+            {"ne", FilterComparison.NotEquals }
         };
 
         //evaluate once then store here
@@ -266,7 +267,7 @@ namespace CalorieMonitor.Logic.Implementations
             }
             if (fieldType.IsEnum)
             {
-                return comparison == FilterComparison.Equals;
+                return comparison == FilterComparison.Equals || comparison == FilterComparison.NotEquals;
             }
             throw new NotImplementedException();
         }
