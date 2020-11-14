@@ -211,7 +211,7 @@ namespace CalorieMonitor.UnitTests.Tests.Controllers
         }
 
         [Fact]
-        public async Task PatchMealEntry_UnAuthorized_Returns401()
+        public async Task PatchMealEntry_Forbidden_Returns403()
         {
             //Arrange
             long id = 2;
@@ -222,7 +222,7 @@ namespace CalorieMonitor.UnitTests.Tests.Controllers
             IActionResult response = await mealsController.PatchMealEntry(null, id);
 
             //Assert
-            ValidateApiError<UnauthorizedObjectResult>(response, 401, "Unauthorized");
+            ValidateApiError<ObjectResult>(response, 403, "Forbidden");
 
             RunVerifications();
         }
@@ -337,7 +337,7 @@ namespace CalorieMonitor.UnitTests.Tests.Controllers
         }
 
         [Fact]
-        public async Task DeleteMealEntry_UnAuthorized_Returns401()
+        public async Task DeleteMealEntry_Forbidden_Returns403()
         {
             //Arrange
             long id = 2;
@@ -348,7 +348,7 @@ namespace CalorieMonitor.UnitTests.Tests.Controllers
             IActionResult response = await mealsController.DeleteMealEntry(id);
 
             //Assert
-            ValidateApiError<UnauthorizedObjectResult>(response, 401, "Unauthorized");
+            ValidateApiError<ObjectResult>(response, 403, "Forbidden");
 
             RunVerifications();
         }
@@ -413,7 +413,7 @@ namespace CalorieMonitor.UnitTests.Tests.Controllers
         }
 
         [Fact]
-        public async Task GetMealEntry_UnAuthorized_Returns401()
+        public async Task GetMealEntry_Forbidden_Returns403()
         {
             //Arrange
             long id = 2;
@@ -424,7 +424,7 @@ namespace CalorieMonitor.UnitTests.Tests.Controllers
             IActionResult response = await mealsController.GetMealEntry(id);
 
             //Assert
-            ValidateApiError<UnauthorizedObjectResult>(response, 401, "Unauthorized");
+            ValidateApiError<ObjectResult>(response, 403, "Forbidden");
 
             RunVerifications();
         }

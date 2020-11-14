@@ -182,7 +182,7 @@ namespace CalorieMonitor.UnitTests.Tests.Controllers
         [InlineData(UserRole.Regular, UserRole.UserManager)]
         [InlineData(UserRole.UserManager, UserRole.Admin)]
         [InlineData(UserRole.UserManager, UserRole.UserManager)]
-        public async Task PatchUser_UnAuthorized_Returns401(UserRole userRole, UserRole roleToUpdate)
+        public async Task PatchUser_Forbidden_Returns403(UserRole userRole, UserRole roleToUpdate)
         {
             //Arrange
             long id = 2;
@@ -193,7 +193,7 @@ namespace CalorieMonitor.UnitTests.Tests.Controllers
             IActionResult response = await usersController.PatchUser(null, id);
 
             //Assert
-            ValidateApiError<UnauthorizedObjectResult>(response, 401, "Unauthorized");
+            ValidateApiError<ObjectResult>(response, 403, "Forbidden");
 
             RunVerifications();
         }
@@ -340,7 +340,7 @@ namespace CalorieMonitor.UnitTests.Tests.Controllers
         }
 
         [Fact]
-        public async Task DeleteUser_UnAuthorized_Returns401()
+        public async Task DeleteUser_Forbidden_Returns401()
         {
             //Arrange
             long id = 2;
@@ -351,7 +351,7 @@ namespace CalorieMonitor.UnitTests.Tests.Controllers
             IActionResult response = await usersController.DeleteUser(id);
 
             //Assert
-            ValidateApiError<UnauthorizedObjectResult>(response, 401, "Unauthorized");
+            ValidateApiError<ObjectResult>(response, 403, "Forbidden");
 
             RunVerifications();
         }
@@ -416,7 +416,7 @@ namespace CalorieMonitor.UnitTests.Tests.Controllers
         }
 
         [Fact]
-        public async Task GetUser_UnAuthorized_Returns401()
+        public async Task GetUser_Forbidden_Returns403()
         {
             //Arrange
             long id = 4;
@@ -427,7 +427,7 @@ namespace CalorieMonitor.UnitTests.Tests.Controllers
             IActionResult response = await usersController.GetUser(id);
 
             //Assert
-            ValidateApiError<UnauthorizedObjectResult>(response, 401, "Unauthorized");
+            ValidateApiError<ObjectResult>(response, 403, "Forbidden");
 
             RunVerifications();
         }

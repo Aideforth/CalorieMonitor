@@ -54,7 +54,7 @@ namespace CalorieMonitor.Controllers
                     entry.EntryUserId = createMealEntryDTO.EntryUser.Id;
                     if (!ValidateAccess(entry))
                     {
-                        throw new UnauthorizedException();
+                        throw new ForbiddenException();
                     }
                     entry.EntryCreatorId = long.Parse(userIdString);
                 }
@@ -246,7 +246,7 @@ namespace CalorieMonitor.Controllers
 
             if (!ValidateAccess(entry))
             {
-                throw new UnauthorizedException();
+                throw new ForbiddenException();
             }
         }
         private bool ValidateAccess(MealEntry entry)

@@ -52,7 +52,7 @@ namespace CalorieMonitor.Controllers
 
                 if (user.Role != UserRole.Regular && !ValidateAccess(user, true))
                 {
-                    throw new UnauthorizedException($"Only Admins are allowed to create user with role {user.Role}");
+                    throw new ForbiddenException($"Only Admins are allowed to create user with role {user.Role}");
                 }
 
                 user = await userLogic.CreateAsync(user);
@@ -270,7 +270,7 @@ namespace CalorieMonitor.Controllers
 
             if (!ValidateAccess(user, onlyAdmins))
             {
-                throw new UnauthorizedException();
+                throw new ForbiddenException();
             }
         }
 
@@ -282,7 +282,7 @@ namespace CalorieMonitor.Controllers
 
             if(string.IsNullOrEmpty(userIdString) || string.IsNullOrEmpty(userRoleString))
             {
-                return false;
+                throw new UnauthorizedException();
             }
 
             if (Enum.TryParse(userRoleString, out UserRole role))

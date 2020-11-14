@@ -41,6 +41,15 @@ namespace CalorieMonitor.Controllers
                 return Unauthorized(new ApiResponse
                 {
                     IsSuccessful = false,
+                    Message = "Unauthorized"
+                });
+            }
+
+            if (ex is ForbiddenException)
+            {
+                return StatusCode(403, new ApiResponse
+                {
+                    IsSuccessful = false,
                     Message = ex.Message
                 });
             }
